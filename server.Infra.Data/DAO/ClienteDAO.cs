@@ -8,6 +8,7 @@ namespace server.Infra.Data.DAO
     public class ClienteDAO
     {
         private const string _connectionString = @"Data Source=.\SQLexpress;initial catalog=SERVERSOLUCAO;uid=sa;pwd=bocaum24;";
+
         
         public void AdicionarCliente(Cliente cliente)
         {
@@ -44,14 +45,28 @@ namespace server.Infra.Data.DAO
                 {
                     comando.Connection = conexao;
 
-                    string sql = @"DELETE FROM CLIENTES WHERE CPF = @CPF;
-                                   DELETE FROM PEDIDOS WHERE CPF_CLIENTE = @CPF;";
+                    string sql = @"DELETE FROM CLIENTES WHERE CPF = @CPF;";
 
                     comando.Parameters.AddWithValue("@CPF", cpf);
 
-
                     comando.CommandText = sql;
 
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeletarPedidosPorCpf(string cpf)
+        {
+            using (var conexao = new SqlConnection(_connectionString))
+            {
+                conexao.Open();
+                using (var comando = new SqlCommand())
+                {
+                    comando.Connection = conexao;
+                    string sql = @"DELETE FROM PEDIDOS WHERE CPF_CLIENTE = @CPF_DIGITADO";
+                    comando.Parameters.AddWithValue("@CPF_DIGITADO", cpf);
+                    comando.CommandText = sql;
                     comando.ExecuteNonQuery();
                 }
             }
@@ -220,5 +235,6 @@ namespace server.Infra.Data.DAO
             }
             return listaClientes;
         }
+
     }
 }

@@ -24,19 +24,21 @@ namespace server.Infra.Data.Repository
                 _clienteDAO.AdicionarPontosFidelidade(novoPedido.ClienteCpf, cliente.PontosFidelidade);
                 _pedidoDAO.AddPedidoComCliente(novoPedido);
                 novoPedido.Produto.DiminuirEstoque(novoPedido.Quantidade);
-                _produtoDAO.AtualizarEstoque(novoPedido.Produto.Id, novoPedido.Produto.Estoque);                
+                _produtoDAO.AtualizarEstoque(novoPedido.Produto.Id, novoPedido.Produto.Estoque);
             }
             else
             {
                 _pedidoDAO.AddPedidoSemCliente(novoPedido);
                 novoPedido.Produto.DiminuirEstoque(novoPedido.Quantidade);
-                _produtoDAO.AtualizarEstoque(novoPedido.Produto.Id, novoPedido.Produto.Estoque);               
+                _produtoDAO.AtualizarEstoque(novoPedido.Produto.Id, novoPedido.Produto.Estoque);
             }
         }
 
         public void DeletarPedido(int id)
         {
-            _pedidoDAO.DeletarPedido(id);
+            var pedido = _pedidoDAO.BuscarPedidoPorID(id);
+            if (pedido.EhPossivelAlterarStatusPedido())
+                _pedidoDAO.DeletarPedido(id);
         }
 
         public List<Pedido> BuscaTodosPedidos()
@@ -53,7 +55,9 @@ namespace server.Infra.Data.Repository
 
         public void AtualizarStatusPedido(int id, StatusPedido status)
         {
-            _pedidoDAO.AtualizarStatusPedido(id, status);
+            var pedido = _pedidoDAO.BuscarPedidoPorID(id);
+            if (pedido.EhPossivelAlterarStatusPedido())
+                _pedidoDAO.AtualizarStatusPedido(id, status);
         }
     }
 }

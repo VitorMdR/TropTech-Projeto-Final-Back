@@ -19,11 +19,6 @@ namespace server.Domain.Features.cliente
             PontosFidelidade += (valor * 2);
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
         public bool ValidarCliente()
         {
             if (Nome.Length < 3)

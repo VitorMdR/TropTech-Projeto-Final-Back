@@ -8,7 +8,7 @@ namespace server.Infra.Data.Repository
     public class ClienteRepository : IClienteRepository
     {
         private ClienteDAO _clienteDAO = new ClienteDAO();
-        
+
         public void CriarNovoCliente(Cliente novoCliente)
         {
             var listaVerificacao = _clienteDAO.BuscaClientes();
@@ -23,6 +23,7 @@ namespace server.Infra.Data.Repository
 
         public void DeletarCliente(string cpf)
         {
+            _clienteDAO.DeletarPedidosPorCpf(cpf);
             _clienteDAO.DeletarCliente(cpf);
         }
 

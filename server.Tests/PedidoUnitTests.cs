@@ -116,11 +116,11 @@ namespace server.Tests
 
             // act
 
-            PedidoException ex = Assert.Throws<PedidoException>(() => pedido.ValidarPedido());
+            PedidoException ex = Assert.Throws<PedidoException>(() => pedido.EhPossivelAlterarStatusPedido());
 
             // assert
 
-            Assert.That(ex.Message, Is.EqualTo("O pedido foi finalizado, não pode ser alterado!"));
+            Assert.That(ex.Message, Is.EqualTo("O pedido foi finalizado e não pode ser alterado!"));
         }
 
         /*

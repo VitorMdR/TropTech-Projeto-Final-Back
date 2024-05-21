@@ -15,11 +15,6 @@ namespace server.Domain.Features.produto
 
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
         public void AddEstoque(int qtd)
         {
 
@@ -30,7 +25,6 @@ namespace server.Domain.Features.produto
 
             this.Estoque -= qtd;
         }
-
 
         public bool ValidarProduto()
         {

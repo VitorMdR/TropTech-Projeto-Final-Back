@@ -12,7 +12,7 @@ namespace server.Tests
          * Então deve resultar em cliente inválido
          */
         [Test]
-        public void Quando_ValidarProduto_E_NomeMenorQueTres_Entao_DeveEstourarExcecao()
+        public void Quando_ValidarProduto_E_NomeMenorQueTres_Entao_DeveRetornarExcecao()
         {
             // arrange
             var cliente = new Cliente();

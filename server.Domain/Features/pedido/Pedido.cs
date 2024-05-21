@@ -27,7 +27,7 @@ namespace server.Domain.Features.pedido
 
         public void ValorTotalPedido()
         {
-            ValorPedido = (Produto.Preco * Quantidade);
+            this.ValorPedido = (Produto.Preco * Quantidade);
             DataPedido = DateTime.Now;
         }
 
@@ -36,21 +36,26 @@ namespace server.Domain.Features.pedido
             if (Quantidade < 1)
                 throw new PedidoException("A quantidade de produtos não pode ser zero ou inferior!");
 
-            if (ValorPedido < 0)
+            if (ValorPedido <= 0)
                 throw new PedidoException("O valor do pedido não pode ser zero ou inferior!");
 
             if (Quantidade > this.Produto.Estoque)
                 throw new PedidoException("Não há estoque suficiente!");
-
-            if (StatusAtual == StatusPedido.finalizado)
-                throw new PedidoException("O pedido foi finalizado, não pode ser alterado!");
 
             if (string.IsNullOrWhiteSpace(ClienteCpf) || string.IsNullOrEmpty(ClienteCpf) || ClienteCpf == "string")
                 return false;
 
             return true;
         }
+        public bool EhPossivelAlterarStatusPedido()
+        {
+            if (StatusAtual == StatusPedido.finalizado)
+                throw new PedidoException("O pedido foi finalizado e não pode ser alterado!");
+
+            return true;
+        }
     }
+        
     public enum StatusPedido
     {
         emAndamento,

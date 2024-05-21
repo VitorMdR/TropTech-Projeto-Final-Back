@@ -14,6 +14,6 @@ namespace server.Domain.Interfaces
         void AddPontosFidelidade(string cpf, double pontosFidelidade);
         void DeletarCliente(string cpf);
         List<Cliente> BuscarCliente();
-        Cliente BuscarClientePorId(int id);
+        Cliente BuscarClientePorId(int id);    
     }
 }

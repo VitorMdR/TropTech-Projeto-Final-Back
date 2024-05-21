@@ -71,7 +71,7 @@ namespace server.Tests
         {
             // arrange
             var produto = new Produto();
-            produto.Validade= DateTime.Now.AddDays(1);
+            produto.Validade = DateTime.Now.AddDays(1);
             produto.Preco = -1;
             produto.Estoque = 10;
             produto.Ativo = true;
@@ -133,7 +133,6 @@ namespace server.Tests
 
             ProdutoException ex = Assert.Throws<ProdutoException>(() => produto.ValidarProduto());
 
-
             // assert
 
             Assert.That(ex.Message, Is.EqualTo("O produto deve iniciar com estoque zero!"));
@@ -159,7 +158,6 @@ namespace server.Tests
 
             ProdutoException ex = Assert.Throws<ProdutoException>(() => produto.ValidarProduto());
 
-
             // assert
 
             Assert.That(ex.Message, Is.EqualTo("O produto deve iniciar com estoque zero!")); ;
@@ -177,7 +175,7 @@ namespace server.Tests
             var produto = new Produto();
             produto.Validade = DateTime.Now.AddDays(-1);
             produto.Preco = 35;
-            produto.Estoque= 10;
+            produto.Estoque = 10;
             produto.Ativo = true;
             produto.Descricao = "Sapo-boi azul";
 
@@ -185,12 +183,10 @@ namespace server.Tests
 
             ProdutoException ex = Assert.Throws<ProdutoException>(() => produto.ValidarProduto());
 
-
             // assert
 
             Assert.That(ex.Message, Is.EqualTo("A data de vencimento não pode ser inferior a hoje!"));
         }
-
         /*
          * Quando validar produto
          * E nome é diferente de vazio
@@ -206,7 +202,7 @@ namespace server.Tests
             var produto = new Produto();
             produto.Validade = DateTime.Now.AddDays(3);
             produto.Preco = 35;
-            produto.Estoque= 0;
+            produto.Estoque = 0;
             produto.Ativo = true;
             produto.Descricao = "Sapo-boi Azul";
 
